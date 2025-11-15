@@ -1,0 +1,6 @@
+@NakliyeTakip.Gateway_HostAddress = http://localhost:5175
+
+GET {{NakliyeTakip.Gateway_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

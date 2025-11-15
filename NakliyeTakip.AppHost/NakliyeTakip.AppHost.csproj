@@ -11,10 +11,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Aspire.Hosting.AppHost" Version="9.5.0" />
+    <PackageReference Include="Aspire.Hosting.AppHost" Version="13.0.0" />
+    <PackageReference Include="Aspire.Hosting.MongoDB" Version="13.0.0" />
+    <PackageReference Include="Aspire.Hosting.PostgreSQL" Version="13.0.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\NakliyeTakip.Gateway\NakliyeTakip.Gateway.csproj" />
     <ProjectReference Include="..\NakliyeTakip.Location.API\NakliyeTakip.Location.API.csproj" />
   </ItemGroup>
 
