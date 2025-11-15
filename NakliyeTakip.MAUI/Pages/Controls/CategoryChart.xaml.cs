@@ -1,0 +1,10 @@
+namespace NakliyeTakip.MAUI.Pages.Controls
+{
+    public partial class CategoryChart
+    {
+        public CategoryChart()
+        {
+            InitializeComponent();
+        }
+    }
+}
