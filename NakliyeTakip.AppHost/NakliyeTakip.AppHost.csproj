@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\NakliyeTakip.API\NakliyeTakip.API.csproj" />
+    <ProjectReference Include="..\NakliyeTakip.Location.API\NakliyeTakip.Location.API.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,6 +1,7 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using NakliyeTakip.MAUI.Models;
+using NakliyeTakip.MAUI.Services;
 
 namespace NakliyeTakip.MAUI.PageModels
 {
@@ -13,6 +14,7 @@ namespace NakliyeTakip.MAUI.PageModels
         private readonly CategoryRepository _categoryRepository;
         private readonly ModalErrorHandler _errorHandler;
         private readonly SeedDataService _seedDataService;
+        private readonly IBackgroundLocationService _backgroundLocationService;
 
         [ObservableProperty]
         private List<CategoryChartData> _todoCategoryData = [];
@@ -39,13 +41,14 @@ namespace NakliyeTakip.MAUI.PageModels
             => Tasks?.Any(t => t.IsCompleted) ?? false;
 
         public MainPageModel(SeedDataService seedDataService, ProjectRepository projectRepository,
-            TaskRepository taskRepository, CategoryRepository categoryRepository, ModalErrorHandler errorHandler)
+            TaskRepository taskRepository, CategoryRepository categoryRepository, ModalErrorHandler errorHandler, IBackgroundLocationService backgroundLocationService)
         {
             _projectRepository = projectRepository;
             _taskRepository = taskRepository;
             _categoryRepository = categoryRepository;
             _errorHandler = errorHandler;
             _seedDataService = seedDataService;
+            _backgroundLocationService = backgroundLocationService;
         }
 
         private async Task LoadData()
@@ -129,6 +132,8 @@ namespace NakliyeTakip.MAUI.PageModels
                 await InitData(_seedDataService);
                 _dataLoaded = true;
                 await Refresh();
+                // Start background location service
+                await _backgroundLocationService.StartAsync();
             }
             // This means we are being navigated to
             else if (!_isNavigatedTo)

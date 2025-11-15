@@ -41,6 +41,8 @@ namespace NakliyeTakip.MAUI
             builder.Services.AddSingleton<MainPageModel>();
             builder.Services.AddSingleton<ProjectListPageModel>();
             builder.Services.AddSingleton<ManageMetaPageModel>();
+            builder.Services.AddSingleton<ILocationService, LocationService>();
+            builder.Services.AddSingleton<IBackgroundLocationService, BackgroundLocationService>();
 
             builder.Services.AddTransientWithShellRoute<ProjectDetailPage, ProjectDetailPageModel>("project");
             builder.Services.AddTransientWithShellRoute<TaskDetailPage, TaskDetailPageModel>("task");
