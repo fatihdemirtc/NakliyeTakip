@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\NakliyeTakip.ServiceDefaults\NakliyeTakip.ServiceDefaults.csproj" />
+    <ProjectReference Include="..\NakliyeTakip.Shared\NakliyeTakip.Shared.csproj" />
   </ItemGroup>
 
 </Project>
