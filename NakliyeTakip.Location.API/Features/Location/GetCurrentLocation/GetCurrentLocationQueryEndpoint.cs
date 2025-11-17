@@ -1,15 +1,16 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using NakliyeTakip.Shared.Extensions;
 
 namespace NakliyeTakip.Location.API.Features.Locations.GetCurrentLocation
 {
-    public static class GetCurrentLocationQueryEndpoint
+    public static class InsertCurrentLocationQueryEndpoint
     {
         public static RouteGroupBuilder GetCurrentLocationEndpoint(this RouteGroupBuilder group)
         {
-            group.MapGet("/",
-                    async (IMediator mediator) =>
-                        (await mediator.Send(new GetCurrentLocationQuery())).ToGenericResult())
+            group.MapGet("/GetCurrentLocation",
+                    async ([FromServices] IMediator mediator) =>
+                        (await mediator.Send(new InsertCurrentLocationQuery())).ToGenericResult())
                 .WithName("GetCurrentLocation")
                 .MapToApiVersion(1, 0);
 

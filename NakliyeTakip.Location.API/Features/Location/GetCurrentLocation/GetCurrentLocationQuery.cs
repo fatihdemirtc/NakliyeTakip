@@ -3,5 +3,5 @@ using NakliyeTakip.Shared;
 
 namespace NakliyeTakip.Location.API.Features.Locations.GetCurrentLocation;
 
-public record GetCurrentLocationQuery : IRequestByServiceResult<LocationDto>;
+public record InsertCurrentLocationQuery : IRequestByServiceResult<LocationDto>;
 

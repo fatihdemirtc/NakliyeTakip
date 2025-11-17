@@ -4,9 +4,9 @@ using NakliyeTakip.Shared;
 
 namespace NakliyeTakip.Location.API.Features.Locations.GetCurrentLocation
 {
-    public class GetCurrentLocationQueryHandler : IRequestHandler<GetCurrentLocationQuery, ServiceResult<LocationDto>>
+    public class InsertCurrentLocationQueryHandler : IRequestHandler<InsertCurrentLocationQuery, ServiceResult<LocationDto>>
     {
-        public async Task<ServiceResult<LocationDto>> Handle(GetCurrentLocationQuery request, CancellationToken cancellationToken)
+        public async Task<ServiceResult<LocationDto>> Handle(InsertCurrentLocationQuery request, CancellationToken cancellationToken)
         {
             
 

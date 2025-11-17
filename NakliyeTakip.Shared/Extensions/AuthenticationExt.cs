@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
@@ -15,7 +14,7 @@ public static class AuthenticationExt
     {
         var identityOptions = configuration.GetSection(nameof(IdentityOption)).Get<IdentityOption>();
         //AUTHENTICATION 
-        services.AddAuthentication()
+        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
         {
             options.Authority = identityOptions.Address;
@@ -56,12 +55,12 @@ public static class AuthenticationExt
         //AUTHORIZATION POLICIES
         services.AddAuthorization(options =>
         {
-            options.AddPolicy("InstructorPolicy", policy =>
+            options.AddPolicy("AdminPolicy", policy =>
             {
                 policy.AuthenticationSchemes.Add(JwtBearerDefaults.AuthenticationScheme);
                 policy.RequireAuthenticatedUser();
                 policy.RequireClaim(ClaimTypes.Email);
-                policy.RequireRole(ClaimTypes.Role, "instructor");
+                policy.RequireRole(ClaimTypes.Role, "admin");
             });
 
 

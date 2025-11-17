@@ -1,4 +1,5 @@
 ﻿using Asp.Versioning.Builder;
+using NakliyeTakip.Location.API.Features.Location.InsertCurrentLocation;
 using NakliyeTakip.Location.API.Features.Locations.GetCurrentLocation;
 
 namespace NakliyeTakip.Location.API.Features.Locations
@@ -9,6 +10,7 @@ namespace NakliyeTakip.Location.API.Features.Locations
         {
             app.MapGroup("api/v{version:apiVersion}/locations").WithTags("locations").WithApiVersionSet(apiVersionSet)
                 .GetCurrentLocationEndpoint()
+                .InsertCurrentLocationGroupItemEndpoint()
                 .RequireAuthorization();
         }
     }

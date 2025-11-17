@@ -1,6 +1,39 @@
-@baseAddress = http://localhost:5142
-@token=5
+﻿@keycloakAddress = http://localhost:8080
+@gatewayAddress = http://localhost:5175
+# ⬆️ Gateway portunu Aspire Dashboard'dan öğrenin
 
-GET {{baseAddress}}/locations/weatherforecast
+### 1. Keycloak'tan Token Al (mobile client ile location.api audience için)
+# @name getToken
+POST {{keycloakAddress}}/realms/NakliyeTenant/protocol/openid-connect/token
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=password
+&client_id=mobile
+&client_secret=lCA00c0JnC0qiMt9nqk42Ely4DrZ63FM
+&username=fatihh
+&password=123456
+
+###
+@token = eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJGbEJLNi0yT24xeGpaNEJmdGEybEdLRlFUMllXZG1FcjBmVVVjX05TdjQ0In0.eyJleHAiOjE3NjM0MDM0NDIsImlhdCI6MTc2MzQwMzE0MiwianRpIjoiYjcwYWZlZjAtOWI3ZC00ODZmLTgyYzgtNDgxMGViOGRhNTE0IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9OYWtsaXllVGVuYW50IiwiYXVkIjoibG9jYXRpb24uYXBpIiwic3ViIjoiMDY2ZWUyMzgtZDVjMi00YzUzLWIxNGUtZjUxNDQ2OTc1MTU4IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoibW9iaWxlIiwic2lkIjoiZjYxMTA4Y2MtM2E5ZC00ODc0LTg0N2MtYjE4MmJiYmI5NzVkIiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyIvKiJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsidXNlciJdfSwic2NvcGUiOiJwcm9maWxlIGVtYWlsIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJmYXRpaGggZmF0aWhoIiwicHJlZmVycmVkX3VzZXJuYW1lIjoiZmF0aWhoIiwiZ2l2ZW5fbmFtZSI6ImZhdGloaCIsImZhbWlseV9uYW1lIjoiZmF0aWhoIiwiZW1haWwiOiJmYXRpaGhAZi5jb20ifQ.g27GvwV1ROxLRhvCMcrqlZK20G5gk9I04VzHaRAUg2EeOlTSCKVxY0cEyGw5TKmRWtwRlKPdZjZ563Mj7ZV8GgZgQr9ZQVC6Ws6JBNddtTDftbPZxk7WMPeIRBDxeLy_6Tw1MWb3-gt5qmiXva__YO1HmBhN39pfYkOl_8qgPd3xnH4hHnN5-FhIVYzSvEAjm_FImPtO_Xb6S6B_K8JgvS3MB4DvMbFG1d1n18XTS0iBGcOOrtfJywn9gWabhdisQknuF8ADLZb2fk1Q3UByi8KMoVPhxuxBee76G_JtT_Wskmm8_cTfvSdbjyi90h0P5Nlzrwi1qFqNio5R1W5HkA
+
+
+### 2. Token'ı Decode Et (Kontrol için - jwt.io'ya yapıştırabilirsiniz)
+
+# Token içeriğini görmek için bu değişkeni kullanın: {{token}}
+
+### 3. Gateway Üzerinden Location API'ye İstek At
+GET {{gatewayAddress}}/v1/locations/GetCurrentLocation
 Accept: application/json
 Authorization: Bearer {{token}}
+
+
+### 2. Insert Current Location (Gateway üzerinden)
+POST {{gatewayAddress}}/v1/locations
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "longitude": 29.123456,
+  "latitude": 41.234567,
+  "userId": "066ee238-d5c2-4c53-b14e-f51446975158"
+}
