@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NakliyeTakip.MAUI.Pages.LoginPage"
+             Title="Giris Yap"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#F5F5F5">
+
+    <Grid Padding="30" RowSpacing="30">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <VerticalStackLayout Grid.Row="0" 
+                            VerticalOptions="End" 
+                            HorizontalOptions="Center" 
+                            Spacing="20">
+            
+            <Border StrokeShape="RoundRectangle 75"
+                    Stroke="{StaticResource Primary}"
+                    StrokeThickness="3"
+                    BackgroundColor="White"
+                    WidthRequest="150"
+                    HeightRequest="150"
+                    HorizontalOptions="Center">
+                <Image Source="dotnet_bot.png" 
+                       WidthRequest="100"
+                       HeightRequest="100"
+                       Aspect="AspectFit"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"/>
+            </Border>
+
+            <VerticalStackLayout Spacing="8" HorizontalOptions="Center">
+                <Label Text="Nakliye Takip"
+                       FontSize="32"
+                       FontAttributes="Bold"
+                       TextColor="{StaticResource Primary}"
+                       HorizontalOptions="Center"/>
+                
+                <Label Text="Keycloak ile guvenli giris yapin"
+                       FontSize="14"
+                       TextColor="Gray"
+                       HorizontalOptions="Center"/>
+            </VerticalStackLayout>
+        </VerticalStackLayout>
+
+        <Border Grid.Row="1"
+                StrokeShape="RoundRectangle 10"
+                Stroke="Transparent"
+                BackgroundColor="{StaticResource Primary}">
+            <Button x:Name="LoginButton"
+                    Text="Keycloak ile Giris Yap"
+                    Clicked="OnLoginClicked"
+                    BackgroundColor="Transparent"
+                    TextColor="White"
+                    HeightRequest="56"
+                    FontSize="16"
+                    FontAttributes="Bold"/>
+        </Border>
+
+        <VerticalStackLayout Grid.Row="2" 
+                            Spacing="10" 
+                            HorizontalOptions="Center">
+            <ActivityIndicator x:Name="LoadingIndicator"
+                              IsRunning="False"
+                              IsVisible="False"
+                              Color="{StaticResource Primary}"
+                              WidthRequest="40"
+                              HeightRequest="40"/>
+            
+            <Label x:Name="LoadingLabel"
+                   Text="Giris yapiliyor..."
+                   FontSize="14"
+                   TextColor="{StaticResource Primary}"
+                   IsVisible="False"
+                   HorizontalOptions="Center"/>
+        </VerticalStackLayout>
+
+        <VerticalStackLayout Grid.Row="3" 
+                            VerticalOptions="Start" 
+                            Spacing="15"
+                            Margin="0,30,0,0">
+            
+            <BoxView HeightRequest="1" 
+                     Color="#E0E0E0" 
+                     Margin="0,0,0,10"/>
+            
+            <Label Text="Guvenli Baglanti"
+                   FontSize="12"
+                   TextColor="#666"
+                   HorizontalTextAlignment="Center"/>
+            
+            <Label Text="Ilk kez giris yapiyorsaniz, Keycloak uzerinden hesap olusturabilirsiniz."
+                   FontSize="11"
+                   TextColor="Gray"
+                   HorizontalTextAlignment="Center"
+                   LineBreakMode="WordWrap"/>
+        </VerticalStackLayout>
+    </Grid>
+    
+</ContentPage>

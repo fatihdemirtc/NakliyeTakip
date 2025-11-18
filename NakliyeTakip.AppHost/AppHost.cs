@@ -1,4 +1,5 @@
 using Projects;
+using System.Net.Sockets;
 
 var builder = DistributedApplication.CreateBuilder(args);
 
@@ -37,7 +38,12 @@ var keycloak = builder.AddContainer("keycloak", "quay.io/keycloak/keycloak", "25
     .WithEnvironment("KC_HOSTNAME_STRICT", "false")
     .WithEnvironment("KC_HEALTH_ENABLED", "true")
     .WithArgs("start").WaitFor(postgresDb)
-    .WithHttpEndpoint(8080, 8080, "keycloak-http-endpoint");
+    .WithEndpoint("keycloak-http-endpoint", endpoint =>
+    {
+        endpoint.Port = 8080;         // host port
+        endpoint.TargetPort = 8080;   // container port
+        endpoint.IsExternal = true;   // DIÞ DÜNYAYA AÇ!
+    });
 
 
 var keycloakEndpoint = keycloak.GetEndpoint("keycloak-http-endpoint");

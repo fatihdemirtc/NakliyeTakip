@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pageModels="clr-namespace:NakliyeTakip.MAUI.PageModels"
+             x:Class="NakliyeTakip.MAUI.Pages.LoginPage"
+             x:DataType="pageModels:LoginPageModel"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="{AppThemeBinding Light={StaticResource Background}, Dark={StaticResource BackgroundDark}}">
+
+    <Grid RowDefinitions="Auto,*" Padding="0">
+        
+        <!-- Header -->
+        <Grid Grid.Row="0" 
+              BackgroundColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"
+              HeightRequest="200">
+            <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="10">
+                <Image Source="appicon.png" 
+                       WidthRequest="80" 
+                       HeightRequest="80"/>
+                <Label Text="NakliyeTakip"
+                       FontSize="28"
+                       FontAttributes="Bold"
+                       TextColor="White"
+                       HorizontalTextAlignment="Center"/>
+                <Label Text="Nakliye Takip Sistemi"
+                       FontSize="14"
+                       TextColor="White"
+                       Opacity="0.8"
+                       HorizontalTextAlignment="Center"/>
+            </VerticalStackLayout>
+        </Grid>
+
+        <!-- Login Form -->
+        <Grid Grid.Row="1" 
+              Padding="30,40"
+              RowDefinitions="Auto,Auto,Auto,Auto,Auto,*"
+              RowSpacing="20">
+
+            <!-- Welcome Text -->
+            <VerticalStackLayout Grid.Row="0" Spacing="5">
+                <Label Text="Hos Geldiniz!"
+                       FontSize="24"
+                       FontAttributes="Bold"
+                       TextColor="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource Gray100}}"/>
+                <Label Text="Devam etmek icin giris yapin"
+                       FontSize="14"
+                       TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray400}}"/>
+            </VerticalStackLayout>
+
+            <!-- Username Entry -->
+            <Border Grid.Row="1"
+                    StrokeThickness="1"
+                    Stroke="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray600}}"
+                    BackgroundColor="{AppThemeBinding Light=White, Dark={StaticResource Gray900}}"
+                    StrokeShape="RoundRectangle 10">
+                <Entry Placeholder="Kullanici Adi"
+                       Text="{Binding Username}"
+                       ReturnType="Next"
+                       Margin="15,10"
+                       FontSize="16"
+                       PlaceholderColor="{AppThemeBinding Light={StaticResource Gray400}, Dark={StaticResource Gray500}}"/>
+            </Border>
+
+            <!-- Password Entry -->
+            <Border Grid.Row="2"
+                    StrokeThickness="1"
+                    Stroke="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray600}}"
+                    BackgroundColor="{AppThemeBinding Light=White, Dark={StaticResource Gray900}}"
+                    StrokeShape="RoundRectangle 10">
+                <Entry Placeholder="Sifre"
+                       Text="{Binding Password}"
+                       IsPassword="True"
+                       ReturnType="Done"
+                       Margin="15,10"
+                       FontSize="16"
+                       PlaceholderColor="{AppThemeBinding Light={StaticResource Gray400}, Dark={StaticResource Gray500}}"/>
+            </Border>
+
+            <!-- Error Message -->
+            <Label Grid.Row="3"
+                   Text="{Binding ErrorMessage}"
+                   TextColor="Red"
+                   FontSize="14"
+                   IsVisible="{Binding ErrorMessage, Converter={StaticResource StringNotEmptyConverter}}"
+                   HorizontalTextAlignment="Center"/>
+
+            <!-- Login Button -->
+            <Button Grid.Row="4"
+                    Text="Giris Yap"
+                    Command="{Binding LoginCommand}"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"
+                    TextColor="White"
+                    FontSize="16"
+                    FontAttributes="Bold"
+                    HeightRequest="55"
+                    CornerRadius="10"
+                    IsEnabled="{Binding IsLoading, Converter={StaticResource InvertedBoolConverter}}">
+                <Button.Shadow>
+                    <Shadow Brush="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"
+                            Opacity="0.3"
+                            Radius="10"
+                            Offset="0,5"/>
+                </Button.Shadow>
+            </Button>
+
+            <!-- Loading Indicator -->
+            <ActivityIndicator Grid.Row="5"
+                               IsRunning="{Binding IsLoading}"
+                               IsVisible="{Binding IsLoading}"
+                               Color="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"
+                               VerticalOptions="Start"
+                               Margin="0,20,0,0"/>
+
+        </Grid>
+    </Grid>
+
+</ContentPage>

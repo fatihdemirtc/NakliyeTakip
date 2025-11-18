@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="NakliyeTakip.MAUI.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:sf="clr-namespace:Syncfusion.Maui.Toolkit.SegmentedControl;assembly=Syncfusion.Maui.Toolkit"
+    xmlns:pages="clr-namespace:NakliyeTakip.MAUI.Pages"
+    Shell.FlyoutBehavior="Flyout"
+    Title="NakliyeTakip.MAUI">
+
+    <!-- Login Page (Hidden from menu) -->
+    <ShellContent
+        Title="Login"
+        ContentTemplate="{DataTemplate pages:LoginPage}"
+        Route="login"
+        FlyoutItemIsVisible="False" />
+
+    <ShellContent
+        Title="Dashboard"
+        Icon="{StaticResource IconDashboard}"
+        ContentTemplate="{DataTemplate pages:MainPage}"
+        Route="main" />
+
+    <ShellContent
+        Title="Projects"
+        Icon="{StaticResource IconProjects}"
+        ContentTemplate="{DataTemplate pages:ProjectListPage}"
+        Route="projects" />
+
+    <ShellContent
+        Title="Manage Meta"
+        Icon="{StaticResource IconMeta}"
+        ContentTemplate="{DataTemplate pages:ManageMetaPage}"
+        Route="manage" />
+
+    <Shell.FlyoutFooter>
+        <Grid Padding="15" RowDefinitions="Auto,Auto" RowSpacing="10">
+            <!-- User Info -->
+            <VerticalStackLayout Grid.Row="0" Spacing="5" Padding="10">
+                <Label Text="{Binding Source={x:Reference AppShellInstance}, Path=UserEmail}"
+                       FontSize="14"
+                       FontAttributes="Bold"/>
+                <Label Text="{Binding Source={x:Reference AppShellInstance}, Path=UserName}"
+                       FontSize="12"
+                       Opacity="0.7"/>
+            </VerticalStackLayout>
+            
+            <!-- Theme Selector & Logout -->
+            <Grid Grid.Row="1" ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                <sf:SfSegmentedControl x:Name="ThemeSegmentedControl" 
+                    Grid.Column="0"
+                    VerticalOptions="Center" HorizontalOptions="Start" 
+                    SelectionChanged="SfSegmentedControl_SelectionChanged"
+                    SegmentWidth="40" SegmentHeight="40">
+                    <sf:SfSegmentedControl.ItemsSource>
+                        <x:Array Type="{x:Type sf:SfSegmentItem}">
+                            <sf:SfSegmentItem ImageSource="{StaticResource IconLight}"/>
+                            <sf:SfSegmentItem ImageSource="{StaticResource IconDark}"/>
+                        </x:Array>
+                    </sf:SfSegmentedControl.ItemsSource>
+                </sf:SfSegmentedControl>
+                
+                <Button Grid.Column="1"
+                        Text="Çıkış"
+                        Clicked="OnLogoutClicked"
+                        BackgroundColor="Transparent"
+                        TextColor="Red"
+                        FontSize="14"/>
+            </Grid>
+        </Grid>
+    </Shell.FlyoutFooter>
+
+</Shell>
