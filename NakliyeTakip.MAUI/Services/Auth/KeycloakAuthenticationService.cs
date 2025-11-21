@@ -1,7 +1,7 @@
 using IdentityModel.OidcClient;
 using IdentityModel.Client;
 
-namespace NakliyeTakip.MAUI.Services;
+namespace NakliyeTakip.MAUI.Services.Auth;
 
 public class KeycloakAuthenticationService : IAuthenticationService
 {
@@ -91,7 +91,7 @@ public class KeycloakAuthenticationService : IAuthenticationService
 
         var token = await SecureStorage.GetAsync("access_token");
         var expiresAtString = await SecureStorage.GetAsync("expires_at");
-        System.Diagnostics.Debug.WriteLine($"[KeycloakAuth] Stored token exists={(token!=null)} expiresAtRaw={expiresAtString}");
+        System.Diagnostics.Debug.WriteLine($"[KeycloakAuth] Stored token exists={token!=null} expiresAtRaw={expiresAtString}");
         
         if (token != null && DateTimeOffset.TryParse(expiresAtString, out var expiresAt))
         {

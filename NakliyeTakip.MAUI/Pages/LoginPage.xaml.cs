@@ -1,4 +1,4 @@
-using NakliyeTakip.MAUI.Services;
+using NakliyeTakip.MAUI.Services.Auth;
 
 namespace NakliyeTakip.MAUI.Pages;
 

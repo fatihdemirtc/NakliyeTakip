@@ -1,19 +1,12 @@
-namespace NakliyeTakip.MAUI.Services;
+namespace NakliyeTakip.MAUI.Services.Auth;
 
-public class AuthenticationDelegatingHandler : DelegatingHandler
+public class AuthenticationDelegatingHandler(IAuthenticationService authService) : DelegatingHandler
 {
-    private readonly IAuthenticationService _authService;
-
-    public AuthenticationDelegatingHandler(IAuthenticationService authService)
-    {
-        _authService = authService;
-    }
-
     protected override async Task<HttpResponseMessage> SendAsync(
         HttpRequestMessage request, 
         CancellationToken cancellationToken)
     {
-        var token = await _authService.GetAccessTokenAsync();
+        var token = await authService.GetAccessTokenAsync();
         
         if (!string.IsNullOrEmpty(token))
         {

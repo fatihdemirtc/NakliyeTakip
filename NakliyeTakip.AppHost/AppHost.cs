@@ -31,6 +31,7 @@ var keycloak = builder.AddContainer("keycloak", "quay.io/keycloak/keycloak", "25
     .WithEnvironment("KC_DB_URL", "jdbc:postgresql://postgres-db-keycloak/keycloak_db")
     .WithEnvironment("KC_DB_USERNAME", postgresUser)
     .WithEnvironment("KC_DB_PASSWORD", postgresPassword)
+    .WithEnvironment("KC_HOSTNAME", "192.168.68.100")
     .WithEnvironment("KC_HOSTNAME_PORT", "8080")
     .WithEnvironment("KC_HOSTNAME_STRICT_BACKCHANNEL", "false")
     .WithEnvironment("KC_HTTP_ENABLED", "true")
@@ -38,6 +39,7 @@ var keycloak = builder.AddContainer("keycloak", "quay.io/keycloak/keycloak", "25
     .WithEnvironment("KC_HOSTNAME_STRICT", "false")
     .WithEnvironment("KC_HEALTH_ENABLED", "true")
     .WithArgs("start").WaitFor(postgresDb)
+    .WithContainerRuntimeArgs("-p", "0.0.0.0:8080:8080")
     .WithEndpoint("keycloak-http-endpoint", endpoint =>
     {
         endpoint.Port = 8080;         // host port

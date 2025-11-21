@@ -1,7 +1,7 @@
 using IdentityModel.OidcClient.Browser;
 using IdentityModel.Client;
 
-namespace NakliyeTakip.MAUI.Services;
+namespace NakliyeTakip.MAUI.Services.Auth;
 
 public class WebAuthenticatorBrowser : IdentityModel.OidcClient.Browser.IBrowser
 {

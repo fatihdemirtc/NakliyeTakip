@@ -1,4 +1,5 @@
 using NakliyeTakip.MAUI.Services;
+using NakliyeTakip.MAUI.Services.Auth;
 
 namespace NakliyeTakip.MAUI.Pages;
 
@@ -6,11 +7,13 @@ public partial class HomePage : ContentPage
 {
     private readonly IAuthenticationService _authService;
     private string? _fullToken;
+    private LocationService LocationService;
 
-    public HomePage(IAuthenticationService authService)
+    public HomePage(IAuthenticationService authService, LocationService LocationService)
     {
         InitializeComponent();
         _authService = authService;
+        this.LocationService = LocationService;
     }
 
     protected override async void OnAppearing()
@@ -43,6 +46,11 @@ public partial class HomePage : ContentPage
 
     private async void OnCopyTokenClicked(object sender, EventArgs e)
     {
+        await LocationService.InsertCurrentLocation(new Dto.InsertCurrentLocationRequest
+        {
+            Latitude = 41.0082,
+            Longitude = 28.9784
+        });
         if (!string.IsNullOrEmpty(_fullToken))
         {
             await Clipboard.SetTextAsync(_fullToken);
@@ -55,6 +63,12 @@ public partial class HomePage : ContentPage
     }
 
     private async void OnRefreshTokenClicked(object sender, EventArgs e)
+    {
+        await LoadTokenInfoAsync();
+        await DisplayAlert("Bilgi", "Token bilgileri yenilendi", "Tamam");
+    }
+
+    private async void OnSendLocationClicked(object sender, EventArgs e)
     {
         await LoadTokenInfoAsync();
         await DisplayAlert("Bilgi", "Token bilgileri yenilendi", "Tamam");

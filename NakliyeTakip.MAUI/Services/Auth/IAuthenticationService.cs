@@ -1,4 +1,4 @@
-namespace NakliyeTakip.MAUI.Services;
+namespace NakliyeTakip.MAUI.Services.Auth;
 
 public interface IAuthenticationService
 {
