@@ -76,6 +76,14 @@
         HeightRequest="50"
         FontAttributes="Bold"/>
 
+                <Button Text="Konum Getir"
+Clicked="OnGetLocationClicked"
+BackgroundColor="{StaticResource Primary}"
+TextColor="White"
+CornerRadius="8"
+HeightRequest="50"
+FontAttributes="Bold"/>
+
                 <Button Text="Guvenli Cikis"
                         Clicked="OnLogoutClicked"
                         BackgroundColor="#FFEBEE"

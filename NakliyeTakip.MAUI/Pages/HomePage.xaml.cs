@@ -46,11 +46,7 @@ public partial class HomePage : ContentPage
 
     private async void OnCopyTokenClicked(object sender, EventArgs e)
     {
-        await LocationService.InsertCurrentLocation(new Dto.InsertCurrentLocationRequest
-        {
-            Latitude = 41.0082,
-            Longitude = 28.9784
-        });
+       
         if (!string.IsNullOrEmpty(_fullToken))
         {
             await Clipboard.SetTextAsync(_fullToken);
@@ -70,8 +66,19 @@ public partial class HomePage : ContentPage
 
     private async void OnSendLocationClicked(object sender, EventArgs e)
     {
-        await LoadTokenInfoAsync();
-        await DisplayAlert("Bilgi", "Token bilgileri yenilendi", "Tamam");
+        await LocationService.InsertCurrentLocation(new Dto.InsertCurrentLocationRequest
+        {
+            Latitude = 41.0082,
+            Longitude = 28.9784,
+            UserId = Guid.Parse("066ee238-d5c2-4c53-b14e-f51446975158")
+        });
+        await DisplayAlert("Bilgi", "Location Inserted", "Tamam");
+    }
+
+    private async void OnGetLocationClicked(object sender, EventArgs e)
+    {
+        var location = await LocationService.GetCurrentLocationByUser(Guid.Parse("066ee238-d5c2-4c53-b14e-f51446975158"));
+        await DisplayAlert("Bilgi", "Location has retrieved", "Tamam");
     }
 
     private async void OnLogoutClicked(object sender, EventArgs e)

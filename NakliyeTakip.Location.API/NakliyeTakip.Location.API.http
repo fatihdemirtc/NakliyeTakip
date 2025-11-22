@@ -1,5 +1,5 @@
 ﻿@keycloakAddress = http://192.168.68.100:8080
-@gatewayAddress = http://localhost:5175
+@gatewayAddress = http://192.168.68.100:5175
 # ⬆️ Gateway portunu Aspire Dashboard'dan öğrenin
 
 ### 1. Keycloak'tan Token Al (mobile client ile location.api audience için)
@@ -21,7 +21,7 @@ grant_type=password
 # Token içeriğini görmek için bu değişkeni kullanın: {{token}}
 
 ### 3. Gateway Üzerinden Location API'ye İstek At
-GET {{gatewayAddress}}/v1/locations/GetCurrentLocation
+GET {{gatewayAddress}}/v1/locations/
 Accept: application/json
 Authorization: Bearer {{token}}
 

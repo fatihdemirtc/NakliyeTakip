@@ -9,7 +9,7 @@ namespace NakliyeTakip.Location.API.Features.Locations
         public static void AddLocationGroupEndpointExt(this WebApplication app, ApiVersionSet apiVersionSet)
         {
             app.MapGroup("api/v{version:apiVersion}/locations").WithTags("locations").WithApiVersionSet(apiVersionSet)
-                .GetCurrentLocationEndpoint()
+                .GetCurrentLocationByUserGroupItemEndpoint()
                 .InsertCurrentLocationGroupItemEndpoint()
                 .RequireAuthorization();
         }
